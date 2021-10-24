@@ -22,6 +22,7 @@ public class ShoppingListServlet extends HttpServlet
 
         if (request.getParameter("logout") != null) 
         {
+            items.clear();
             session.invalidate();
         }
 
@@ -49,6 +50,14 @@ public class ShoppingListServlet extends HttpServlet
             getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
             return;
         } 
+        else if (request.getParameter("add") != null) 
+        {
+            items.add(request.getParameter("item"));
+
+            session.setAttribute("items", items);
+            getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response);
+            return;
+        }
 
     }
 
